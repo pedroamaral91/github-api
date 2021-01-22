@@ -1,11 +1,8 @@
 {
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/api",
-      "packages/web"
-    ]
-  },
+  "workspaces": [
+    "packages/**"
+  ],
   "scripts": {
     "test": "yarn workspace api test",
     "api:start": "yarn workspace api start:dev",
