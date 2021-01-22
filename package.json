@@ -7,9 +7,12 @@
     ]
   },
   "scripts": {
-    "api:start": "yarn workspace api start",
+    "test": "yarn workspace api test",
+    "api:start": "yarn workspace api start:dev",
     "api:test": "yarn workspace api test",
-    "api:test:e2e": "yarn workspace api test:e2e"
+    "api:test:unit": "yarn workspace api test:unit",
+    "api:test:e2e": "yarn workspace api test:e2e",
+    "api:test:cov": "yarn workspace api test:cov"
   },
   "devDependencies": {
     "husky": "^4.3.8",

@@ -1,4 +1,5 @@
 /node_modules
 /packages/api/node_modules
 /packages/api/dist
+/packages/api/coverage
 /packages/web/node_modules

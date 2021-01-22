@@ -6,8 +6,10 @@
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "start": "yarn build && NODE_ENV=dev node dist/main/server.js",
-    "test": "yarn test:unit && yarn test:e2e",
-    "test:unit": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand --no-cache",
+    "start:dev": "NODE_ENV=dev sucrase-node src/main/server.ts",
+    "test": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand --no-cache",
+    "test:cov": "yarn test -- --coverage",
+    "test:unit": "cross-env NODE_ENV=test jest --config ./jest-unit.config.js --passWithNoTests --runInBand --no-cache",
     "test:e2e": "cross-env NODE_ENV=test jest --config ./jest-e2e.config.js --passWithNoTests --runInBand --no-cache"
   },
   "devDependencies": {
