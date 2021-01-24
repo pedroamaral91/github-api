@@ -1,6 +1,0 @@
-{
-  "*.ts": [
-    "eslint 'packages/**' --fix",
-    "yarn test"
-  ]
-}
