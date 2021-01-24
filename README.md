@@ -41,12 +41,12 @@ yarn start
 
 ---
 
-`yarn api:test` - Roda testes de integração e unitários no backend
-`yarn api:test:unit` - Roda testes unitários no backend
-`yarn api:test:e2e` - Roda testes de integração no backend
-`yarn web:test` - Roda testes no frontend
-`yarn web:test:cov` - Gera coverage de testes do front
-`yarn api:test:cov` - Gera coverage de testes da api
+- `yarn api:test` - Roda testes de integração e unitários no backend
+- `yarn api:test:unit` - Roda testes unitários no backend
+- `yarn api:test:e2e` - Roda testes de integração no backend
+- `yarn web:test` - Roda testes no frontend
+- `yarn web:test:cov` - Gera coverage de testes do front
+- `yarn api:test:cov` - Gera coverage de testes da api
 
 #### TODO :}
 
@@ -55,3 +55,4 @@ yarn start
 - **Virtualização das opções do Select na home para evitar problemas de perfomance**
 - Componente para tratamento de erros na aplicação (front)
 - Componente maneiro de loader :b
+- Ajustes no tamanho dos cards e melhor disposição dos elementos na tela

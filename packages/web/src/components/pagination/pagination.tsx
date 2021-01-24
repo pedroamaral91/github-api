@@ -1,9 +1,6 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/require-default-props */
-import ReactPaginate from 'react-paginate';
-import { useResponsive } from '../../hooks/useResponsive/useResponsive';
-import { StyledPaginateContainer } from './styles';
+import ReactPaginate from 'react-paginate'
+import { useResponsive } from '../../hooks/useResponsive/useResponsive'
+import { StyledPaginateContainer } from './styles'
 
 interface PaginationProps {
   pagesQuantity: number;
@@ -13,16 +10,16 @@ interface PaginationProps {
   currentPage?: number;
 }
 
-const ariaBuilder = (selected: any) => `page-${selected}`;
+const ariaBuilder = (selected: any) => `page-${selected}`
 
 export const Pagination = ({
   pagesQuantity,
   previousLabel,
   nextLabel,
   currentPage,
-  onPageChange,
-}: PaginationProps): JSX.Element => {
-  const { isLargerThanLg } = useResponsive();
+  onPageChange
+}: PaginationProps) => {
+  const { isLargerThanLg } = useResponsive()
 
   return (
     <StyledPaginateContainer aria-label="pagination-list">
@@ -47,5 +44,5 @@ export const Pagination = ({
         forcePage={currentPage}
       />
     </StyledPaginateContainer>
-  );
-};
+  )
+}

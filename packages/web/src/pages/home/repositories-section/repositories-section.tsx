@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
-import { FC, useState, useCallback } from 'react';
-import { Button, Flex, Grid, Image, Text } from '@chakra-ui/react';
-import { useRepositories } from '../../../hooks/repositories/useRepositories';
-import { Pagination } from '../../../components/pagination/pagination';
+import { FC, useState, useCallback } from 'react'
+import { Button, Flex, Grid, Image, Text } from '@chakra-ui/react'
+import { useRepositories } from '../../../hooks/repositories/useRepositories'
+import { Pagination } from '../../../components/pagination/pagination'
 
 type AvatarSectionProps = {
   url: string;
@@ -17,7 +16,7 @@ const AvatarSection: FC<AvatarSectionProps> = ({ url, full_name }) => (
       {full_name}
     </Text>
   </Flex>
-);
+)
 
 type RepositoryCardProps = {
   full_name: string;
@@ -27,9 +26,9 @@ type RepositoryCardProps = {
 };
 
 const RepositoryCard: FC<RepositoryCardProps> = (props: RepositoryCardProps) => {
-  const { avatar_url, description, full_name, html_url } = props;
+  const { avatar_url, description, full_name, html_url } = props
   return (
-    <Flex alignItems="center" justifyContent="center" flexDir="column" boxShadow="base" p="5" rounded="md" bg="white">
+    <Flex alignItems="center" justifyContent="center" flexDir="column" boxShadow="base" p="5" rounded="md" bg="white" w="100%">
       <AvatarSection full_name={full_name} url={avatar_url} />
       <Flex p="3">{description}</Flex>
       <Flex p="3">
@@ -38,22 +37,22 @@ const RepositoryCard: FC<RepositoryCardProps> = (props: RepositoryCardProps) => 
         </Button>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
 type RepositoriesSectionProps = {
   language: string;
 };
 
 export const RepositoriesSection: FC<RepositoriesSectionProps> = ({ language }) => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1)
   const handlePageChange = useCallback(({ selected }) => {
-    setPage(selected + 1);
-  }, []);
+    setPage(selected + 1)
+  }, [])
 
-  const { data, statusCodeError } = useRepositories({ language, page: page.toString() });
+  const { data, statusCodeError } = useRepositories({ language, page: page.toString() })
   if (statusCodeError) {
-    return <div>error</div>;
+    return <div>error</div>
   }
   if (data) {
     return (
@@ -62,7 +61,7 @@ export const RepositoriesSection: FC<RepositoriesSectionProps> = ({ language }) 
           justifyItems="center"
           w="100%"
           my="5"
-          templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)']}
+          templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
           columnGap="5"
           rowGap="5"
         >
@@ -82,7 +81,7 @@ export const RepositoriesSection: FC<RepositoriesSectionProps> = ({ language }) 
           currentPage={page - 1}
         />
       </Flex>
-    );
+    )
   }
-  return <div>loading..</div>;
-};
+  return <div>loading..</div>
+}

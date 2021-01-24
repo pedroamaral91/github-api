@@ -1,5 +1,5 @@
-import { LanguageType } from './languages.interface';
+import { LanguageType } from './languages.interface'
 
 export const mockLanguages: LanguageType = {
-  name: 'TypeScript',
-};
+  name: 'TypeScript'
+}

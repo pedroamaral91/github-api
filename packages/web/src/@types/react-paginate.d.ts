@@ -1,4 +1,4 @@
-import 'react-paginate';
+import 'react-paginate'
 
 declare module 'react-paginate' {
   export interface ReactPaginateProps extends ReactPaginateProps {
@@ -6,6 +6,6 @@ declare module 'react-paginate' {
   }
 }
 
-declare const ReactPaginate: React.ComponentClass<ReactPaginateProps>;
+declare const ReactPaginate: React.ComponentClass<ReactPaginateProps>
 
-export default ReactPaginate;
+export default ReactPaginate

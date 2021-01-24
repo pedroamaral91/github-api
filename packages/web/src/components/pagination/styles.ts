@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const StyledPaginateContainer = styled.div`
   .pagination {
@@ -35,4 +35,4 @@ export const StyledPaginateContainer = styled.div`
     align-items: center;
     justify-content: center;
   }
-`;
+`

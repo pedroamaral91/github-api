@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import { FC, memo } from 'react';
-import ReactSelect, { ValueType, Props } from 'react-select';
+import { FC, memo } from 'react'
+import ReactSelect, { ValueType, Props } from 'react-select'
 
 type Option = {
   label: string;
@@ -16,9 +14,9 @@ type SelectProps = Props & {
 const customStyles = {
   container: (provided: any) => ({
     ...provided,
-    width: '100%',
-  }),
-};
+    width: '100%'
+  })
+}
 
 const SelectComponent: FC<SelectProps> = ({ onChange, options, isLoading, isClearable, ...rest }) => (
   <ReactSelect
@@ -29,6 +27,6 @@ const SelectComponent: FC<SelectProps> = ({ onChange, options, isLoading, isClea
     options={options}
     {...rest}
   />
-);
+)
 
-export const Select = memo(SelectComponent);
+export const Select = memo(SelectComponent)

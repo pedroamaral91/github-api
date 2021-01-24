@@ -2,15 +2,15 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 import path from 'path'
 
-const { NODE_ENV } = process.env
+const envPath = (file): string => path.join(__dirname, file)
 
-const envPath = path.resolve(__dirname, `../../../.env.${NODE_ENV}`)
+const envs = {
+  production: envPath('/envs/.env'),
+  dev: envPath('/envs/.dev.env'),
+  test: envPath('/envs/.test.env')
+}
 
-dotenv.config({
-  path: fs.existsSync(envPath)
-    ? envPath
-    : path.resolve(__dirname, '../../../.env')
-})
+dotenv.config({ path: envs[process.env.NODE_ENV ?? 'dev'] })
 
 export const env = {
   PORT: process.env.PORT,
