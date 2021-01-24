@@ -1,32 +1,31 @@
 import { FindRepositoriesController } from './find-repositories.controller'
-import { mockRepositoriesGithubNormalizedData } from '@/data/mocks/repositores-github-response.mock'
-import { RepositoriesByLanguage } from '@/data/usecases/repositories-by-language'
-import { api } from '@/utils/api'
+import { GetRepositories } from '@/domain/usecases'
+import { GetRepositoriesSpy, mockRepositoriesResponse } from '../mocks/get-repositories.mock'
 
 type FindRepositoriesControllerFactory = {
-  repository: RepositoriesByLanguage
+  getRepositories: GetRepositories
   controller: FindRepositoriesController
 }
 
 const makeFindRepositoriesController = (): FindRepositoriesControllerFactory => {
-  const repository = new RepositoriesByLanguage(api)
-  const controller = new FindRepositoriesController(repository)
-  return { controller, repository }
+  const getRepositories = new GetRepositoriesSpy()
+  const controller = new FindRepositoriesController(getRepositories)
+  return { controller, getRepositories }
 }
 
 describe('Find Repositories Controller tests', () => {
   it('should return correct values and call service with correct value', async () => {
-    const { controller, repository } = makeFindRepositoriesController()
-    jest.spyOn(repository, 'search').mockResolvedValueOnce([mockRepositoriesGithubNormalizedData])
+    const { controller, getRepositories } = makeFindRepositoriesController()
+    jest.spyOn(getRepositories, 'find').mockResolvedValueOnce(mockRepositoriesResponse())
     const response = await controller.handle({ language: 'any_language' })
     expect(response).toMatchObject({
       statusCode: 200,
-      body: [mockRepositoriesGithubNormalizedData]
+      body: mockRepositoriesResponse()
     })
   })
   it('should throw if service throws', () => {
-    const { controller, repository } = makeFindRepositoriesController()
-    jest.spyOn(repository, 'search').mockRejectedValueOnce(new Error())
+    const { controller, getRepositories } = makeFindRepositoriesController()
+    jest.spyOn(getRepositories, 'find').mockRejectedValueOnce(new Error())
     expect(controller.handle({ language: 'any_language' })).rejects.toThrowError()
   })
 })

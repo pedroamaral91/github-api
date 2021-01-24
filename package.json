@@ -5,13 +5,16 @@
   ],
   "scripts": {
     "test": "yarn workspace api test",
+    "start": "concurrently \"yarn workspace web start\" \"yarn api:start\"",
     "api:start": "yarn workspace api start:dev",
     "api:test": "yarn workspace api test",
     "api:test:unit": "yarn workspace api test:unit",
     "api:test:e2e": "yarn workspace api test:e2e",
-    "api:test:cov": "yarn workspace api test:cov"
+    "api:test:cov": "yarn workspace api test:cov",
+    "web:test": "yarn workspace web test"
   },
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.3"
   },

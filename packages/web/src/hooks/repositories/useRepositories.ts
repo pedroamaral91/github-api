@@ -8,7 +8,10 @@ type UseRepositoriesProps = {
 
 export const useRepositories = (params: UseRepositoriesProps) => {
   const queryParams = new URLSearchParams(params).toString();
-  const { data, error } = useSWR(`${RepositoriesService.URL}?${queryParams}`, RepositoriesService.get);
+  const { data, error } = useSWR(`${RepositoriesService.URL}?${queryParams}`, RepositoriesService.get, {
+    revalidateOnFocus: false,
+    shouldRetryOnError: false,
+  });
   return {
     data,
     statusCodeError: error?.response?.status,

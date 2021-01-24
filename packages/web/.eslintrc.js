@@ -37,6 +37,8 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'max-len': ['error', { code: 120 }],
     'function-paren-newline': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'object-curly-newline': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

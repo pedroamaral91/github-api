@@ -1,11 +1,11 @@
 import { Controller } from '@/presentation/protocols/controller'
 import { HttpResponse } from '@/presentation/protocols/http'
-import { FindRepositoriesByLanguage } from '@/data/protocols'
+import { GetRepositories } from '@/domain/usecases'
 
 export class FindRepositoriesController implements Controller {
-  constructor (private readonly findRepositoriesByLanguage: FindRepositoriesByLanguage) {}
+  constructor (private readonly findRepositoriesByLanguage: GetRepositories) {}
   async handle (request: FindRepositoriesController.Params): Promise<HttpResponse> {
-    const response = await this.findRepositoriesByLanguage.search(request.language, request.page, request.per_page)
+    const response = await this.findRepositoriesByLanguage.find({ language: request.language, page: request.page })
     return {
       statusCode: 200,
       body: response

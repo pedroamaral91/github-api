@@ -1,32 +1,31 @@
 import { FindLanguagesController } from './find-languages.controller'
-import { mockGithubLanguages } from '@/data/mocks/repositores-github-response.mock'
-import { Languages } from '@/data/usecases'
-import { api } from '@/utils/api'
+import { GetLanguages } from '@/domain/usecases'
+import { GetLanguagesSpy, mockLanguageResponse } from '../mocks/get-language.mock'
 
 type FindRepositoriesControllerFactory = {
-  repository: Languages
+  getLanguages: GetLanguages
   controller: FindLanguagesController
 }
 
 const makeFindRepositoriesController = (): FindRepositoriesControllerFactory => {
-  const repository = new Languages(api)
-  const controller = new FindLanguagesController(repository)
-  return { controller, repository }
+  const getLanguages = new GetLanguagesSpy()
+  const controller = new FindLanguagesController(getLanguages)
+  return { controller, getLanguages }
 }
 
 describe('Find Languages Controller tests', () => {
   it('should return correct values', async () => {
-    const { controller, repository } = makeFindRepositoriesController()
-    jest.spyOn(repository, 'search').mockResolvedValueOnce([mockGithubLanguages])
+    const { controller, getLanguages } = makeFindRepositoriesController()
+    jest.spyOn(getLanguages, 'search').mockResolvedValueOnce(mockLanguageResponse())
     const response = await controller.handle()
     expect(response).toMatchObject({
       statusCode: 200,
-      body: [mockGithubLanguages]
+      body: mockLanguageResponse()
     })
   })
   it('should throw if service throws', () => {
-    const { controller, repository } = makeFindRepositoriesController()
-    jest.spyOn(repository, 'search').mockRejectedValueOnce(new Error())
+    const { controller, getLanguages } = makeFindRepositoriesController()
+    jest.spyOn(getLanguages, 'search').mockRejectedValueOnce(new Error())
     expect(controller.handle()).rejects.toThrowError()
   })
 })

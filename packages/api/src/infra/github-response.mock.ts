@@ -73,16 +73,7 @@ export const mockRepositoriesGithubResponse = {
   }]
 }
 
-export const mockRepositoriesGithubNormalizedData = {
-  id: 1296269,
-  name: 'Hello-World',
-  full_name: 'octocat/Hello-World',
-  description: 'This your first repo!',
-  html_url: 'https://github.com/octocat',
-  avatar: 'https://github.com/images/error/octocat_happy.gif'
-}
-
-export const mockGithubLanguages = {
+export const mockLanguagesGithubResponse = {
   name: 'TypeScript',
   aliases: [
     'typescript',

@@ -1,1 +1,2 @@
-export * from './repositores-github-response.mock'
+export * from './return-repositories.mock'
+export * from './repositories.mock'

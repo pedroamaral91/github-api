@@ -1,38 +1,30 @@
 import axios from 'axios'
 import { Languages } from './languages'
-import { mockGithubLanguages } from '../mocks/repositores-github-response.mock'
-
-jest.mock('axios')
+import { mockLanguages } from '../mocks/return-repositories.mock'
+import { LanguageRepositorySpy } from '../mocks/repositories.mock'
 
 type FactoryLanguages = {
   findLanguages: Languages
+  languageRepository: LanguageRepositorySpy
 }
-const mockLanguages = (): FactoryLanguages => {
-  const findLanguages = new Languages(axios)
-  return { findLanguages }
+const mockLanguagesFactory = (): FactoryLanguages => {
+  const languageRepository = new LanguageRepositorySpy()
+  const findLanguages = new Languages(languageRepository)
+  return { findLanguages, languageRepository }
 }
-
-const mockResponseGithubLanguages = { data: [mockGithubLanguages].map(({ name }) => ({ name })) }
 
 describe('Find Languages tests', () => {
   afterEach(() => jest.clearAllMocks())
 
   it('should return languages', async () => {
-    jest.spyOn(axios, 'get').mockResolvedValueOnce(mockResponseGithubLanguages)
-    const { findLanguages } = mockLanguages()
+    const { findLanguages } = mockLanguagesFactory()
     const response = await findLanguages.search()
-    expect(response).toMatchObject([{ name: mockGithubLanguages.name }])
+    expect(response).toMatchObject([{ name: 'PHP' }, { name: 'JavaScript' }])
   })
-  it('should call [get] function from axios with correct values', async () => {
-    jest.spyOn(axios, 'get').mockResolvedValueOnce(mockResponseGithubLanguages)
-    const { findLanguages } = mockLanguages()
-    await findLanguages.search()
-    expect(axios.get).toHaveBeenCalledTimes(1)
-    expect(axios.get).toHaveBeenCalledWith('/languages')
-  })
+
   it('should throw if github API throws', () => {
-    jest.spyOn(axios, 'get').mockRejectedValueOnce(new Error())
-    const { findLanguages } = mockLanguages()
+    const { findLanguages, languageRepository } = mockLanguagesFactory()
+    jest.spyOn(languageRepository, 'searchLanguages').mockRejectedValueOnce(new Error())
     expect(findLanguages.search()).rejects.toThrowError()
   })
 })

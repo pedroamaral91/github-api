@@ -5,7 +5,7 @@ import { mockRepository } from '../../services/get-repositories/repositories.moc
 
 describe('[useRepositories] hook tests', () => {
   it('[useRepositories] - should return correct languages', async () => {
-    jest.spyOn(RepositoriesService, 'get').mockResolvedValueOnce([mockRepository]);
+    jest.spyOn(RepositoriesService, 'get').mockResolvedValueOnce(mockRepository);
     const { waitForNextUpdate, result } = renderHookWithProviders(() =>
       useRepositories({ language: 'JavaScript', page: '1' }),
     );
@@ -13,7 +13,7 @@ describe('[useRepositories] hook tests', () => {
     await waitForNextUpdate();
 
     expect(RepositoriesService.get).toHaveBeenCalledWith('/repositories?language=JavaScript&page=1');
-    expect(result.current.data).toMatchObject([mockRepository]);
+    expect(result.current.data).toMatchObject(mockRepository);
     expect(result.current.statusCodeError).toBeUndefined();
   });
   it('[useRepositories] - should return error true', async () => {

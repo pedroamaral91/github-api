@@ -1,2 +1,2 @@
-export * from './find-repositories-by-language.interface'
-export * from './find-languages.interface'
+export * from './repositories-repository.interface'
+export * from './languages-repository'

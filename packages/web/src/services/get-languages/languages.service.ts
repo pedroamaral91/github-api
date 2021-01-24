@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { api } from '../../utils/api';
 import { LanguageType } from './languages.interface';
 
 const get = async () => {
-  const { data } = await axios.get<LanguageType[]>('/languages');
+  const { data } = await api.get<LanguageType[]>('/languages');
   return data;
 };
 

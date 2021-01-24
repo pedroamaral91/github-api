@@ -1,16 +1,9 @@
-import { FindLanguages } from '../protocols/find-languages.interface'
-import { AxiosInstance } from 'axios'
+import { GetLanguages } from '@/domain/usecases/get-languages'
+import { LanguagesRepository } from '../protocols/languages-repository'
+export class Languages implements GetLanguages {
+  constructor (private readonly languagesRepository: LanguagesRepository) {}
 
-type GithubLanguageResponse = {
-  name: string
-  aliases: string[]
-}
-
-export class Languages implements FindLanguages {
-  constructor (private readonly axios: AxiosInstance) {}
-
-  async search (): Promise<FindLanguages.Result[]> {
-    const { data } = await this.axios.get<GithubLanguageResponse[]>('/languages')
-    return data.map(({ name }) => ({ name }))
+  async search (): Promise<LanguagesRepository.Result[]> {
+    return await this.languagesRepository.searchLanguages()
   }
 }
